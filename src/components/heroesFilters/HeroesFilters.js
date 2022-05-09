@@ -1,18 +1,11 @@
 import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchFilters } from "../../actions";
-import { filterChanged } from "./filtersSlice";
+
+import { fetchFilters, filterChanged } from "./filtersSlice";
 
 import Spinner from "../spinner/Spinner";
 import classNames from "classnames";
-
-// Задача для этого компонента:
-// Фильтры должны формироваться на основании загруженных данных
-// Фильтры должны отображать только нужных героев при выборе
-// Активный фильтр имеет класс active
-// Изменять json-файл для удобства МОЖНО!
-// Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
 	const { request } = useHttp();
@@ -22,7 +15,7 @@ const HeroesFilters = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchFilters(request));
+		dispatch(fetchFilters());
 	}, []);
 
 	if (filtersLoadingStatus === "loading") {
